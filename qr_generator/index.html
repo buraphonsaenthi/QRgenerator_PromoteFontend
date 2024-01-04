@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBTC QR Code Generator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" href="https://searchtelecomlicense.nbtc.go.th/assets/images/logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap" rel="stylesheet">
+    <style>
+        #imageModal img {
+            max-width: 100%;
+            max-height: 100vh;
+            display: block;
+            margin: auto;
+        }
+
+        .modal-dialog {
+            max-width: 1500px;
+        }
+
+        body {
+            font-family: 'Noto Sans Thai', sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <img src="https://searchtelecomlicense.nbtc.go.th/assets/images/logo.png" alt="Logo" class="header-logo">
+            <h1>สำนักงานคณะกรรมการกิจการกระจายเสียง กิจการโทรทัศน์ และกิจการโทรคมนาคมแห่งชาติ</h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card mt-5">
+                        <div class="card-body">
+                            <h2 class="card-title text-center mb-4">QR Code Generator</h2>                           
+                            <div id="qr-container" class="mb-3">
+                                <input type="text" id="urlInput" class="form-control mb-2" placeholder="Enter URL">
+                                <button id="generateBtn" class="btn btn-primary" onclick="generateQR()">Generate QR Code</button>
+                            </div>
+                            <div id="qrcode"></div>
+                            <div id="download-btn" class="mb-3">
+                                <button class="btn btn-success" onclick="downloadQR()">Download QR Image</button>
+                            </div>   
+
+                            <p class="text-start">
+                                <h3>
+                                    แชร์ไฟล์ได้ที่ ระบบ 
+                                <a href="https://box.nbtc.go.th/signin" target="_blank">NBTC Box</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                
+                                    วิธี Get Link ที่ต้องการแชร์ไฟล์เพื่อสร้าง QR Code
+                                <a href="javascript:void(0);" onclick="showImageModal()">คลิกเพื่อดูวิธีการใช้งาน</a>
+                                </h3>   
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <div class="modal" id="imageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">วิธีการใช้งาน box.nbtc.go.th</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="assets\Box.nbtc.manual.jpg" alt="Image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+      <h3>  Copyright © Information Technology @ NBTC 2023 </h3>
+    </footer>
+
+    <script src="qrcode.min.js"></script>
+    <script>
+        var generatedLink = null;
+
+        function generateQR() {
+            var urlInput = document.getElementById("urlInput").value;
+            var qrcodeContainer = document.getElementById("qrcode");
+            var generateBtn = document.getElementById("generateBtn");
+            qrcodeContainer.innerHTML = "";
+
+            if (urlInput !== "") {
+                
+                var qrcode = new QRCode(qrcodeContainer, {
+                    text: urlInput,
+                    width: 190,
+                    height: 190
+                });
+                generatedLink = urlInput;
+                generateBtn.disabled = true;
+            } else {
+                alert("Please enter a URL");
+            }
+        }
+
+        function downloadQR() {
+            var qrcodeContainer = document.getElementById("qrcode");
+            var qrImage = qrcodeContainer.querySelector("img");
+
+            if (qrImage) {
+
+                var imageUrl = qrImage.src;
+                var downloadLink = document.createElement("a");
+                downloadLink.href = imageUrl;
+                downloadLink.download = "QRcode.png";
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            } else {
+                alert("Please generate a QR code first.");
+            }
+        }
+
+        function showImageModal() {
+            var modal = new bootstrap.Modal(document.getElementById('imageModal'));
+            modal.show();
+        }
+        setInterval(function () {
+            var currentLink = document.getElementById("urlInput").value;
+
+            if (generatedLink !== currentLink) {
+                document.getElementById("generateBtn").disabled = false;
+                document.getElementById("qrcode").innerHTML = "";
+            }
+        }, 500);
+    </script>
+
+    <script src="bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
