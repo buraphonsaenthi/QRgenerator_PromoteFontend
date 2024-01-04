@@ -1,0 +1,150 @@
+body {
+    font-family: 'Noto Sans Thai', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    font-family: 'Noto Sans Thai', sans-serif;
+    background-color: #800000;
+    color: #ffffff;
+    text-align: center;
+    padding: 5px;
+    width: 100%;
+    margin: auto;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    max-height: 75px;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    border-radius: 50%;
+    background-color: white;
+    padding: 5px;
+}
+
+header h1 {
+    font-size: 25px;
+}
+
+
+footer {
+    color: rgb(35, 32, 32);
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin: auto;
+    font-size: 14px;
+}
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+}
+
+.btn-container {
+    text-align: center;
+}
+
+.btn-container a {
+    margin: 20px auto;
+}
+
+
+.btn-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    margin: 10px 0; 
+}
+
+
+.btn-container a {
+    margin: 20px 0; 
+    background-color: #222222;
+    color: white;
+    transition: border-color 0.3s ease;
+    border: 1px solid transparent;
+    font-size: 20px;
+    padding: 10px 20px; 
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.btn-container a:hover {
+    background-color: #800000;
+    color: white;
+    border-color: transparent;
+    animation: bounce 0.5s ease, borderExpand 0.3s ease;
+}
+
+.btn-container a:active {
+    transform: scale(0.95);
+}
+
+.text-container h2 {
+    font-size: 40px;
+    margin: auto;
+    margin-top: 50px;
+    color: #000000;
+}
+
+.button-logo {
+    display: flex;
+    align-items: center;
+    max-width: 250px;
+    height: auto;
+    border-radius: 10px;
+    margin: auto;
+}
+
+.button-logo img {
+    max-width: 250px;
+    height: auto;
+    border-radius: 10px;
+}
+
+
+@media (max-width: 767px) {
+    .btn-container a {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+
+    footer {
+        position: relative;
+        margin-top: 40vh;
+    }
+}
+
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+} 
+
+
+
